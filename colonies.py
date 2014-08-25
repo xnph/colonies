@@ -24,7 +24,8 @@ planets and such"""
         
         self.ID = Planet.planetcount
         self.name = self.generateRandomName()
-
+        self.type = self.chooseRandomPlanetType()
+        
     def generateRandomName(self):
         #uses the "randomname lists" to generate a name
         #issue is names have a chance of not being unique
@@ -36,11 +37,22 @@ planets and such"""
 
         return name
 
+    def chooseRandomPlanetType(self):
+        terraintype = Planet.planettypes[random.randrange( len(Planet.planettypes) - 1 )]
+        return terraintype
+    
 a = Planet()
 b = Planet()
 c = Planet()
 
 print a.name
 print a.ID
+print a.type
+print "\n"
 print b.name
 print b.ID
+print b.type
+print "\n"
+print c.name
+print c.ID
+print c.type
