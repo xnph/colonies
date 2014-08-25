@@ -11,12 +11,23 @@ class Planet:
 planets and such"""
     planetcount = 0 #each planet will have an id
     
-    planettypes = ["desert","ocean","terra"] #will add more types later on
+    planettypes = ["Desert","Ocean","Terra", "Gas", "Barren", "Ice", "Rocky", "Lava"] #will add more types later on
 
     #Lists used in random name generation
-    prefixes = ["As","An","Ba","Br","Ca","Ce"]
-    middles = ["ara","leth","exer","olor","sam"]
-    suffixes = ["ason","bas","ceres","loth","xis"]
+    prefixes = ["As","An","Ba","Br","Ca","Ce", "Da" "Dou", "Ea", "Eg", "Fa", "Fi", "Ga" ,
+                "Go", "Ha", "He", "Il" "Ik", "Ja", "Jo", "Ky", "Kr", "La", "L'", "Ma",
+                "Mr", "Nar", "Ne", "Or", "Oo", "Pa", "Pi" , "Qe", "Qu", "Ra", "Ry",
+                "Sa", "Sk", "Ta" , "Ti", "Ur", "Ua", "Ve", "Vi", "Wa", "We", "Xa", "Xo",
+                "Yar", "Yil", "Zo", "Za"]
+    
+    middles = ["ara","bac","cara", "door", "exi", "for", "goor", "har", "ilo", "jar" ,
+               "kas", "lars", "mor", "noor","oo", "para", "quar", "rely", "so'ra", "tun" ,
+               "uvula", "ver", "wari", "xahna", "yool", "zyzz",
+               "leth","exer","olor","sam"]
+    
+    suffixes = ["ason","bas","ceres","delt", "eran", "fosh", "gras", "hard", "iin",
+                "jon", "krom", "lesh", "mon", "nix", "o", "pad", "qu", "rad", "san",
+                "tal", "'uve", "vor", "want", "xerex", "yan", "zom"]
     
     def __init__(self):
 
