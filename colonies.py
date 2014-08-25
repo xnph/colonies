@@ -29,30 +29,31 @@ planets and such"""
     def generateRandomName(self):
         #uses the "randomname lists" to generate a name
         #issue is names have a chance of not being unique
-        prefix = Planet.prefixes[random.randrange( len(Planet.prefixes) - 1 )]
-        middle = Planet.middles[random.randrange( len(Planet.middles) - 1 )]
-        suffix = Planet.suffixes[random.randrange( len(Planet.suffixes) - 1 )]
+        prefix = Planet.prefixes[random.randrange( len(Planet.prefixes))]
+        middle = Planet.middles[random.randrange( len(Planet.middles))]
+        suffix = Planet.suffixes[random.randrange( len(Planet.suffixes))]
 
         name = prefix + middle + suffix
 
         return name
 
     def chooseRandomPlanetType(self):
-        terraintype = Planet.planettypes[random.randrange( len(Planet.planettypes) - 1 )]
+        terraintype = Planet.planettypes[random.randrange( len(Planet.planettypes))]
         return terraintype
-    
-a = Planet()
-b = Planet()
-c = Planet()
 
-print a.name
-print a.ID
-print a.type
-print "\n"
-print b.name
-print b.ID
-print b.type
-print "\n"
-print c.name
-print c.ID
-print c.type
+
+#Code beyond here is primarily used to test features and the code
+def main():
+    PLANETLIST = []
+    count = 0
+
+    while count <> 20:
+        PLANETLIST.append(Planet())
+        count +=1
+
+    for p in PLANETLIST:
+        print "ID: " + str(p.ID)
+        print "Name: " + p.name
+        print "Type: " + p.type
+
+main()
