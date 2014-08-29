@@ -127,25 +127,29 @@ class Player:
         planettype = PLANETLIST[currentplanetindex].type
         print ("This is " + planetname + ", it is a " + planettype + " type")
         
-    def warp(self):
-        currentplanet = Game.PLANETLIST[self.location] #the planet the player is on
+    def warp(self, PLANETLIST):
+        currentplanet = PLANETLIST[self.LOCATION] #the planet the player is on
 
         count = 0
         
 
         print("The following planets are available for warp:")
 
-        for name in currentplanet.ADJLIST: #prints out each planet's name
+        for planetid in currentplanet.adjlist: #prints out each planet's name
             count += 1
-            print count + ". " + name 
+            name = PLANETLIST[planetid].name
+            print str(count) + ". " + name
 
         choice = 0
-        adjlistlength = len(currentplanet.ADJLIST)
-        while (choice <= 0) or choice > adjlistlength:
-            print("Select a planet to warp to:")
-            choice = raw_input(">")
+        adjlistlength = len(currentplanet.adjlist)
+
+        #needs validation
+        print("Select a planet to warp to:")
+        choice = raw_input(">")
             
-        
+        print "WARPING"
+        planetindex = int(choice) - 1
+        self.LOCATION = currentplanet.adjlist[planetindex]
         
         
             
@@ -158,5 +162,16 @@ def main():
     
     player = Player()
     player.describeLocation(game.PLANETLIST)
+    
+    while True: #main game loop
         
+        choice = "0"
+        while choice <> "1" or choice <> "2":
+            print "Select an action, 1.Describe Planet, 2.Travel to another planet" 
+            choice = raw_input(">")
+
+            if choice == "1":
+                player.describeLocation(game.PLANETLIST)
+            elif choice == "2":
+                player.warp(game.PLANETLIST)
 main()
