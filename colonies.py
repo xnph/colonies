@@ -65,7 +65,7 @@ class Game:
         
     def initialisePlanets(self):
         """generates random planets"""
-        PLANETLIST = list(self.PLANETLIST) #stores all planets in a copy of Game.PLANETLIST
+        PLANETLIST = self.PLANETLIST #stores all planets in a copy of Game.PLANETLIST
         NUMPLANETS = self.NUMPLANETS #number of planets to generate
         count = 0
 
@@ -75,13 +75,13 @@ class Game:
 
         
         self.generatePlanetEdges(PLANETLIST)
+##        FUN BIT TO SEE ALL THE PLANETS
+##        for p in PLANETLIST:
+##            print "ID: " + str(p.ID)
+##            print "Name: " + p.name
+##            print "Type: " + p.type
+##            print "ADJLIST: " + str(p.adjlist) + "\n"
         
-        for p in PLANETLIST:
-            print "ID: " + str(p.ID)
-            print "Name: " + p.name
-            print "Type: " + p.type
-            print "ADJLIST: " + str(p.adjlist) + "\n"
-
     def generatePlanetEdges(self, PLANETLIST):
         """Creates the connections between planets"""
         maxlinks = self.MAXEDGES #the maximum number of edges between planets
@@ -101,13 +101,62 @@ class Game:
                 VALIDLIST.remove(VALIDLIST[randnum])#remove that planet from valid list
                 count += 1
                 
+    def mainLoop(self,player):
+        pass
             
-            
+class Player:
+    """class representing the player of the game, stores current planet pos"""
+    def __init__(self):
+        self.LOCATION = 1
+        self.NAME = self.setName()
+        self.ACTIONLIST = ["Describe","Warp"] #list of possible actions
+    def setName(self): #set player name
+        print("What is your name?")
+        name = raw_input(">")
+
+        print("Welcome to Colonies!")
+        return name        
+
+    def setLocation(self,planet): #set player's location, Planet Obj passed in
+        self.LOCATION = planet.ID
+
+    def describeLocation(self,PLANETLIST):
+        currentplanetindex = self.LOCATION
+
+        planetname = PLANETLIST[currentplanetindex].name
+        planettype = PLANETLIST[currentplanetindex].type
+        print ("This is " + planetname + ", it is a " + planettype + " type")
+        
+    def warp(self):
+        currentplanet = Game.PLANETLIST[self.location] #the planet the player is on
+
+        count = 0
         
 
+        print("The following planets are available for warp:")
+
+        for name in currentplanet.ADJLIST: #prints out each planet's name
+            count += 1
+            print count + ". " + name 
+
+        choice = 0
+        adjlistlength = len(currentplanet.ADJLIST)
+        while (choice <= 0) or choice > adjlistlength:
+            print("Select a planet to warp to:")
+            choice = raw_input(">")
+            
+        
+        
+        
+            
 #Code beyond here is primarily used to test features and the code
 def main():
-    game = Game()
-    game.initialisePlanets()
+    game = Game() #init gameobject
+    game.initialisePlanets() #load planetlist
 
+    
+    
+    player = Player()
+    player.describeLocation(game.PLANETLIST)
+        
 main()
