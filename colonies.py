@@ -30,7 +30,7 @@ planets and such"""
                 "tal", "'uve", "vor", "want", "xerex", "yan", "zom"]
 
     def __init__(self):
-
+        """random generation of the Planet's properties"""
         Planet.planetcount += 1 #becomes ID
 
         self.ID = Planet.planetcount
@@ -53,51 +53,61 @@ planets and such"""
         terraintype = Planet.planettypes[random.randrange( len(Planet.planettypes))]
         return terraintype
 
+class Game:
+    """Class with master functions, initialisations and variables"""
+
+    def __init__(self):
+        self.PLANETLIST = [] #stores all planets
+
+        
+        self.NUMPLANETS = 20 #number of planets to generate
+        self.MAXEDGES = 3 #Maximum number of edges between planets
+        
+    def initialisePlanets(self):
+        """generates random planets"""
+        PLANETLIST = list(self.PLANETLIST) #stores all planets in a copy of Game.PLANETLIST
+        NUMPLANETS = self.NUMPLANETS #number of planets to generate
+        count = 0
+
+        while count <> NUMPLANETS:
+            PLANETLIST.append(Planet())
+            count +=1
+
+        
+        self.generatePlanetEdges(PLANETLIST)
+        
+        for p in PLANETLIST:
+            print "ID: " + str(p.ID)
+            print "Name: " + p.name
+            print "Type: " + p.type
+            print "ADJLIST: " + str(p.adjlist) + "\n"
+
+    def generatePlanetEdges(self, PLANETLIST):
+        """Creates the connections between planets"""
+        maxlinks = self.MAXEDGES #the maximum number of edges between planets
+        
+        
+        
+        for p in PLANETLIST: #for each planet in PLANETLIST
+            
+            VALIDLIST = list(PLANETLIST) #copy of planetlist
+            VALIDLIST.remove(p) #remove the planet itself from the list of planets
+
+            #then select 3(or maxlinks) random planets to link to
+            count = 0
+            while count <> maxlinks:
+                randnum = random.randrange(0,len(VALIDLIST)-1) # a random planet
+                p.adjlist.append(VALIDLIST[randnum].ID)# add random planet to adjlist
+                VALIDLIST.remove(VALIDLIST[randnum])#remove that planet from valid list
+                count += 1
+                
+            
+            
+        
+
 #Code beyond here is primarily used to test features and the code
 def main():
-    PLANETLIST = [] #stores all planets
-    NUMPLANETS = 10 #generates 10 planets
-    count = 0
+    game = Game()
+    game.initialisePlanets()
 
-    while count <> NUMPLANETS:
-        PLANETLIST.append(Planet())
-        count +=1
-
-    PLANETGRAPH = generatePlanetGraph(PLANETLIST, PLANETLIST[1])
-
-    for p in PLANETLIST:
-        print "ID: " + str(p.ID)
-        print "Name: " + p.name
-        print "Type: " + p.type
-        print "ADJLIST: " + str(p.adjlist) + "\n"
-
-#will probably be recursive
-def generatePlanetGraph(PLANETLIST, planet): #will loop through all planets and do some shit
-    maxedges = 4 #I don't want a ridiculous number of edges between planets
-    PLANETGRAPH = {}
-    
-    
-    connectedlist = []
-    
-    numplanets = random.randrange(1,maxedges) #number of planet links
-    PLANETLIST.remove(planet) #remove current planet from list
-    count = 0
-    while count <> numplanets :
-        
-        randomplanet = random.randrange(0, len(PLANETLIST))
-        connectedlist.append(PLANETLIST[randomplanet])
-        PLANETLIST.remove(PLANETLIST[randomplanet])
-
-        count += 1
-
-    PLANETGRAPH[planet] = connectedlist
-        
-    for p in connectedlist:
-        
-        generatePlanetGraph(PLANETLIST,p)
-
-    return PLANETGRAPH
-        
-        
 main()
-
